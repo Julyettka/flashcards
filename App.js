@@ -5,6 +5,9 @@ import Decks from './components/Decks'
 import NewDeck from './components/NewDeck'
 import { TabNavigator } from 'react-navigation'
 import { primaryDark, primary, white, primaryLight } from './utils/colors'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import reducer from './reducers'
 
 function FlashStatusBar ({ backgroundColor, ...props}) {
   return (
@@ -53,10 +56,12 @@ const Tabs = TabNavigator({
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-      <FlashStatusBar backgroundColor={primaryDark} barStyle='light-content'/>
-        <Tabs />
-      </View>
+      <Provider store={createStore(reducer)}>
+        <View style={styles.container}>
+        <FlashStatusBar backgroundColor={primaryDark} barStyle='light-content'/>
+          <Tabs />
+        </View>
+      </Provider>
     );
   }
 }
