@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, FlatList } from 'react-native'
 import { fetchDecks } from '../utils/api'
 import { connect } from 'react-redux'
 import { getDecks } from '../actions'
 import { AppLoading } from 'expo'
+import { white } from '../utils/colors'
+import DeckCard from './DeckCard'
 
 class Decks extends Component {
 	state = {
@@ -14,6 +16,15 @@ class Decks extends Component {
 		fetchDecks().then(decks => dispatch(getDecks(decks)))
             .then(() => this.setState(() => ({ready: true})))
 	}
+	renderItem = ({ item }) => (
+        <View >
+
+                <DeckCard
+                    title={item.title}
+                    questions={item.questions}/>
+        </View>
+    );
+
 	render () {
 		const { decks } = this.props
 		const { ready } = this.state
@@ -21,12 +32,21 @@ class Decks extends Component {
 			return <AppLoading/>
 		}
 		return (
-			<View>
-				<Text> initialData </Text>
-			</View>
+			<FlatList
+				data={Object.values(decks)}
+				renderItem={this.renderItem}
+				keyExtractor={(item, index) => index}
+			/>
 			)
 	}
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: white,
+  },
+})
 
 function mapStateToProps(decks) {
 	return {
