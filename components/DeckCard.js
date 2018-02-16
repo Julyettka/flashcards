@@ -8,7 +8,7 @@ export default class DeckCard extends Component {
 		return <View style={styles.deck}>
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
                 <Text style={styles.title}>{title}</Text>
-                <Text style={styles.info}>{questions.length} cards</Text>
+                <Text style={styles.info}>{questions.length}{questions.length > 1 ? ` cards` : ` card` }</Text>
             </View>
         </View>
     }
