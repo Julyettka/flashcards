@@ -62,7 +62,14 @@ const MainNav = StackNavigator({
     screen: Tabs
   },
   DeckInfo: {
-    screen: DeckInfo
+    screen: DeckInfo,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: primary,
+        height: 60,
+      }
+    }
   },
 })
 
