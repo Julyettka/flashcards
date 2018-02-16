@@ -38,3 +38,7 @@ export function initialData() {
     AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(data));
     return data;
 }
+
+export function mergeDeck (deck) {
+	return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify(deck))
+}

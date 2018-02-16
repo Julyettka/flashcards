@@ -3,11 +3,12 @@ import { StyleSheet, Text, View, StatusBar, Platform } from 'react-native';
 import { Constants } from 'expo'
 import Decks from './components/Decks'
 import NewDeck from './components/NewDeck'
-import { TabNavigator } from 'react-navigation'
+import { TabNavigator, StackNavigator } from 'react-navigation'
 import { primaryDark, primary, white, primaryLight } from './utils/colors'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
+import DeckInfo from './components/DeckInfo'
 
 function FlashStatusBar ({ backgroundColor, ...props}) {
   return (
@@ -32,6 +33,9 @@ const Tabs = TabNavigator({
   }
 },
 {
+  navigationOptions: {
+    header: null
+  },
   tabBarOptions: {
     activeTintColor: Platform.OS === 'ios' ? primary : white,
     style: {
@@ -53,13 +57,22 @@ const Tabs = TabNavigator({
   }
 )
 
+const MainNav = StackNavigator({
+  Home: {
+    screen: Tabs
+  },
+  DeckInfo: {
+    screen: DeckInfo
+  },
+})
+
 export default class App extends React.Component {
   render() {
     return (
       <Provider store={createStore(reducer)}>
         <View style={styles.container}>
         <FlashStatusBar backgroundColor={primaryDark} barStyle='light-content'/>
-          <Tabs />
+          <MainNav />
         </View>
       </Provider>
     );

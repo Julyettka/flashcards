@@ -18,10 +18,9 @@ class Decks extends Component {
 	}
 	renderItem = ({ item }) => (
         <View >
-
-                <DeckCard
-                    title={item.title}
-                    questions={item.questions}/>
+            <DeckCard
+                title={item.title}
+                questions={item.questions}/>
         </View>
     );
 

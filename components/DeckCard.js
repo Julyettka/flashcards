@@ -17,8 +17,8 @@ export default class DeckCard extends Component {
 const styles = StyleSheet.create({
     deck: {
         height: 140,
-        justifyContent: 'center',
         alignItems: 'center',
+        justifyContent: 'center',
         borderWidth: 0.5,
         borderColor: divider,
     },
