@@ -11,7 +11,7 @@ function AddCardBtn ({ onPress }) {
             </TouchableOpacity>
 		)
 }
-
+//disable button if 0 cards
 function StartQuizBtn ({ onPress }) {
 	return (
 			<TouchableOpacity
@@ -35,8 +35,8 @@ export default class DeckInfo extends Component {
 			<View style={styles.container}>
 	        	<Text style={styles.title}> {title} </Text>
 	            <Text style={styles.info}>{questions.length}{questions.length > 1 ? ` cards` : ` card` }</Text>
-	            <AddCardBtn onPress={this.AddCardBtn}/>
-	            <StartQuizBtn onPress={this.StartQuizBtn}/>
+	            <AddCardBtn onPress={() => this.props.navigation.navigate('AddQuestion', {title, questions})}/>
+	            <StartQuizBtn onPress={() => this.props.navigation.navigate('Quiz', {title, questions})}/>
 	        </View>
 			)
     }

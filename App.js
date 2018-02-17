@@ -9,6 +9,8 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
 import DeckInfo from './components/DeckInfo'
+import AddQuestion from './components/AddQuestion'
+import Quiz from './components/Quiz'
 
 function FlashStatusBar ({ backgroundColor, ...props}) {
   return (
@@ -68,9 +70,33 @@ const MainNav = StackNavigator({
       headerStyle: {
         backgroundColor: primary,
         height: 60,
+        marginTop: -20
       }
     }
   },
+  AddQuestion: {
+  screen: AddQuestion,
+      navigationOptions: {
+        headerTintColor: white,
+        headerStyle: {
+          backgroundColor: primary,
+          height: 60,
+          marginTop: -20
+        }
+      }
+  },
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: {
+        title: 'Quiz',
+        headerTintColor: white,
+        headerStyle: {
+          backgroundColor: primary,
+          height: 60,
+          marginTop: -20
+        }
+      }
+  }
 })
 
 export default class App extends React.Component {
