@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
-import { white, primaryDark, primaryLight, primary, primaryText, secondaryText, accent } from '../utils/colors'
+import { white, primaryDark, primaryLight, primary, primaryText, secondaryText, accent, divider } from '../utils/colors'
 
 function CorrectBtn ({ onPress }) {
 	return (
@@ -11,7 +11,7 @@ function CorrectBtn ({ onPress }) {
             </TouchableOpacity>
 		)
 }
-//disable button if 0 cards
+
 function IncorrectBtn ({ onPress }) {
 	return (
 			<TouchableOpacity
@@ -22,26 +22,74 @@ function IncorrectBtn ({ onPress }) {
 		)
 }
 
+function StartAgain ({ onPress }) {
+	return (
+			<TouchableOpacity
+			style={styles.CorrectBtn}
+			onPress= {onPress}>
+                <Text style={{color: white}}> Start Again </Text>
+            </TouchableOpacity>
+		)
+}
+
 export default class Quiz extends Component{
-	increment = (counter) => {
-		return counter++;
+	state = {
+		counter: 0,
+		score: 0,
+		showAns: false,
+	}
+
+	showAns = () => {
+		this.setState({
+			showAns: !this.state.showAns
+		})
+	}
+
+	onCorrect = () => {
+		const { counter, score } = this.state
+		this.setState({
+			counter: counter + 1,
+			score: score + 1,
+			showAns: false
+		})
+
+	}
+
+	onIncorrect = () => {
+	}
+
+	StartAgain = () => {
+		//reset current quiz
 	}
 
 	render () {
 		const { width, height } = Dimensions.get('window')
 		const { title, questions } = this.props.navigation.state.params
-		const counter = 1;
-		return (
-			<View style={styles.container}>
-				<Text style={styles.title}> {`Quiz in ${title} deck`} </Text>
-	            <Text style={styles.stat}>{`${counter}/${questions.length}`}</Text>
-	            <View style={[styles.flipcard, {width: width - 100}]}>
-	            	<Text>blabla</Text>
-	            </View>
-	            <Text style={{fontSize: 16, marginBottom: 40, textDecorationLine: 'underline'}}>View answer</Text>
-	            <CorrectBtn/>
-	            <IncorrectBtn/>
-	        </View>
+		const { counter, showAns, score} = this.state
+		const isAvailable = counter < questions.length
+		return(
+			<View style={{flex: 1}}>
+			{isAvailable ? (
+				<View style={styles.container}>
+					<Text style={styles.title}> {`Quiz in ${title} deck`} </Text>
+		            <Text style={styles.stat}>{`${counter + 1}/${questions.length}`}</Text>
+		            <View style={[styles.flipcard, {width: width - 100}]}>
+		            	<Text style={styles.qna}>{showAns ? questions[counter].answer :
+		            		questions[counter].question}</Text>
+		            </View>
+		            <TouchableOpacity onPress={this.showAns}>
+		            	<Text style={styles.check}>{showAns ? `Hide answer` : `Show answer`}</Text>
+		            </TouchableOpacity>
+		            <CorrectBtn onPress={this.onCorrect}/>
+		            <IncorrectBtn/>
+		        </View>
+				) : (
+				<View style={styles.container}>
+					<Text style={styles.title}>Your score: {score} of {questions.length}</Text>
+					<StartAgain onPress={this.StartAgain}/>
+				</View>
+				)}
+			</View>
 			)
     }
 }
@@ -50,12 +98,13 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		alignItems: 'center',
+		justifyContent: 'center',
 	},
 	flipcard: {
 		alignItems: 'center',
 		borderWidth: 1,
-		borderColor: primaryLight,
-		backgroundColor: primaryLight,
+		borderColor: primaryDark,
+		backgroundColor: primaryDark,
 		borderRadius: 10,
 		padding: 35,
 		height: 220,
@@ -71,13 +120,23 @@ const styles = StyleSheet.create({
 	title: {
     	fontSize: 28,
     	color: primaryText,
-		marginTop: 30,
+		marginTop: 10,
 		marginBottom: 20,
     },
     stat: {
     	fontSize: 20,
     	color: secondaryText,
     	marginBottom: 20,
+    },
+    qna: {
+    	color: white,
+    	fontSize: 20,
+    	textAlign: 'center',
+    },
+    check: {
+    	fontSize: 16,
+    	marginBottom: 40,
+    	textDecorationLine: 'underline',
     },
     CorrectBtn: {
     	backgroundColor: primary,
