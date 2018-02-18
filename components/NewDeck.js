@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TextInput, TouchableOpacity,
-	Platform, KeyboardAvoidingView, Alert } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView, Alert } from 'react-native'
 import { primaryText, white, primaryDark } from '../utils/colors'
 import { addDeck } from '../actions/'
 import { mergeDeck } from '../utils/api'
@@ -34,7 +33,13 @@ class NewDeck extends Component {
 			}
 			dispatch(addDeck(newDeck))
 			mergeDeck(newDeck)
-			Alert.alert('Deck added')
+			Alert.alert('Successful', 'Deck added',
+			[
+                {
+                    text: 'OK', onPress: () =>
+                    this.props.navigation.goBack()
+                }
+            ])
 			this.setState({deckTitle: ''})
 		}
 	}

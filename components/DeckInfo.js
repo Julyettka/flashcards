@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
-import { white, primaryDark, primaryLight, primary, primaryText, secondaryText } from '../utils/colors'
+import { white, primaryDark, primary, primaryText, secondaryText } from '../utils/colors'
 
 function AddCardBtn ({ onPress }) {
 	return (
@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
 	    alignItems: 'center',
 	    marginTop: 10,
 	    marginBottom: 10,
+	    width: 160
     },
     quizBtn: {
     	backgroundColor: primaryDark,
@@ -81,6 +82,7 @@ const styles = StyleSheet.create({
 	    alignItems: 'center',
 	    marginTop: 10,
 	    marginBottom: 10,
+	    width: 160
     }
 
 })

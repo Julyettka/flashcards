@@ -42,3 +42,18 @@ export function initialData() {
 export function mergeDeck (deck) {
 	return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify(deck))
 }
+
+export function mergeQuestion({card, deck}) {
+    return AsyncStorage.getItem(DECKS_STORAGE_KEY, (err, result) => {
+        let decks = JSON.parse(result);
+
+        let newQuestions = JSON.parse(JSON.stringify(decks[deck].questions));
+        newQuestions[newQuestions.length] = card;
+
+        const value = JSON.stringify({
+            [deck]: {title: deck, questions: newQuestions},
+        });
+
+        AsyncStorage.mergeItem(DECKS_STORAGE_KEY, value);
+    });
+}
