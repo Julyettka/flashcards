@@ -31,7 +31,7 @@ let data = {
 export function fetchDecks() {
     return AsyncStorage.getItem(DECKS_STORAGE_KEY).then(results => {
         return results === null ? initialData() : JSON.parse(results)
-    });
+    })
 }
 
 export function initialData() {
@@ -52,7 +52,7 @@ export function mergeQuestion({card, deck}) {
 
         const value = JSON.stringify({
             [deck]: {title: deck, questions: newQuestions},
-        });
+        })
 
         AsyncStorage.mergeItem(DECKS_STORAGE_KEY, value);
     });

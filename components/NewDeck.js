@@ -25,14 +25,14 @@ class NewDeck extends Component {
 		else if (title === decks.title){
 			Alert.alert('This deck already exists')
 		} else {
-			const newDeck = {
+			const deck = {
 				title: {
 					title: title,
 					questions: []
 				}
 			}
-			dispatch(addDeck(newDeck))
-			mergeDeck(newDeck)
+			dispatch(addDeck(deck))
+			mergeDeck(deck)
 			Alert.alert('Successful', 'Deck added',
 			[
                 {

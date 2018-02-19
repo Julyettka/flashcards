@@ -22,12 +22,22 @@ function IncorrectBtn ({ onPress }) {
 		)
 }
 
-function StartAgain ({ onPress }) {
+function StartAgainBtn ({ onPress }) {
 	return (
 			<TouchableOpacity
 			style={styles.CorrectBtn}
 			onPress= {onPress}>
                 <Text style={{color: white}}> Start Again </Text>
+            </TouchableOpacity>
+		)
+}
+
+function BackDeckBtn ({ onPress}){
+	return (
+			<TouchableOpacity
+			style={styles.BackDeckBtn}
+			onPress= {onPress}>
+                <Text style={{color: white}}> Go Back </Text>
             </TouchableOpacity>
 		)
 }
@@ -56,10 +66,25 @@ export default class Quiz extends Component{
 	}
 
 	onIncorrect = () => {
+		const { counter } = this.state
+		this.setState({
+			counter: counter + 1,
+			showAns: false
+		})
 	}
 
 	StartAgain = () => {
-		//reset current quiz
+		const { counter, score } = this.state
+		this.setState({
+			counter: 0,
+			score: 0,
+			showAns: false
+		})
+
+	}
+
+	BackDeck = () => {
+		this.props.navigation.goBack()
 	}
 
 	render () {
@@ -81,12 +106,13 @@ export default class Quiz extends Component{
 		            	<Text style={styles.check}>{showAns ? `Hide answer` : `Show answer`}</Text>
 		            </TouchableOpacity>
 		            <CorrectBtn onPress={this.onCorrect}/>
-		            <IncorrectBtn/>
+		            <IncorrectBtn onPress={this.onIncorrect}/>
 		        </View>
 				) : (
 				<View style={styles.container}>
 					<Text style={styles.title}>Your score: {score} of {questions.length}</Text>
-					<StartAgain onPress={this.StartAgain}/>
+					<StartAgainBtn onPress={this.StartAgain}/>
+					<BackDeckBtn onPress={this.BackDeck}/>
 				</View>
 				)}
 			</View>
@@ -103,8 +129,8 @@ const styles = StyleSheet.create({
 	flipcard: {
 		alignItems: 'center',
 		borderWidth: 1,
-		borderColor: primaryDark,
-		backgroundColor: primaryDark,
+		borderColor: primary,
+		backgroundColor: primary,
 		borderRadius: 10,
 		padding: 35,
 		height: 220,
@@ -139,7 +165,7 @@ const styles = StyleSheet.create({
     	textDecorationLine: 'underline',
     },
     CorrectBtn: {
-    	backgroundColor: primary,
+    	backgroundColor: primaryDark,
 	    padding: 10,
 	    paddingLeft: 40,
 	    paddingRight: 40,
@@ -153,6 +179,19 @@ const styles = StyleSheet.create({
     },
     IncorrectBtn: {
     	backgroundColor: accent,
+	    padding: 10,
+	    paddingLeft: 40,
+	    paddingRight: 40,
+	    height: 50,
+	    borderRadius: 2,
+	    justifyContent: 'center',
+	    alignItems: 'center',
+	    marginTop: 10,
+	    marginBottom: 10,
+	    width: 160
+    },
+    BackDeckBtn: {
+    	backgroundColor: primary,
 	    padding: 10,
 	    paddingLeft: 40,
 	    paddingRight: 40,
