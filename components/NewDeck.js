@@ -17,20 +17,15 @@ class NewDeck extends Component {
 	}
 
 	addDeck = () => {
-		// should check all the state
 		const { dispatch, decks } = this.props
 		const deckObj = this.state
-		if (!deckObj.title) {
+		if (!deckObj.deckTitle) {
 			Alert.alert('Deck name cannot be empty')
 		}
-		else if (deckObj.title === decks.title){
+		else if (deckObj.deckTitle === decks.title){
 			Alert.alert('This deck already exists')
 		} else {
-			const newDeck = {
-				{
-					[deckObj.newDeck]: { title: deckObj.newDeck, questions: []}
-				}
-			}
+			const newDeck = {[deckObj.deckTitle]: {title: deckObj.deckTitle, questions: []}}
 			dispatch(addDeck(newDeck))
 			mergeDeck(newDeck)
 			Alert.alert('Successful', 'Deck added',
