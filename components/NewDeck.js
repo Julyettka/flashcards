@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView, Alert } from 'react-native'
 import { primaryText, white, primaryDark } from '../utils/colors'
-import { addDeck } from '../actions/'
+import { addDeck } from '../actions'
 import { mergeDeck } from '../utils/api'
 import { connect } from 'react-redux'
 import SubmitBtn from './SubmitBtn'
@@ -27,7 +27,7 @@ class NewDeck extends Component {
 		} else {
 			const deck = {
 				title: {
-					title: title,
+					title,
 					questions: []
 				}
 			}

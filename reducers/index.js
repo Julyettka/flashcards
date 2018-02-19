@@ -6,6 +6,8 @@ function decks(state = {}, action) {
             return {...state, ...action.decks};
 
         case ADD_DECK:
+            //console.log(state);
+            console.log(action);
             return {...state, ...action.deck};
 
         case ADD_QUESTION:

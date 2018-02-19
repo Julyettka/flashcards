@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, AsyncStorage } from 'react-native'
+import { AsyncStorage } from 'react-native'
 
 export const DECKS_STORAGE_KEY = 'decks:mobile-flashcards';
 
@@ -53,7 +53,6 @@ export function mergeQuestion({card, deck}) {
         const value = JSON.stringify({
             [deck]: {title: deck, questions: newQuestions},
         })
-
         AsyncStorage.mergeItem(DECKS_STORAGE_KEY, value);
     });
 }
