@@ -29,6 +29,7 @@ let data = {
 }
 
 export function fetchDecks() {
+	//AsyncStorage.clear(DECKS_STORAGE_KEY); //clear all my tests
     return AsyncStorage.getItem(DECKS_STORAGE_KEY).then(results => {
         return results === null ? initialData() : JSON.parse(results)
     })
@@ -43,6 +44,7 @@ export function mergeDeck (deck) {
 	return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify(deck))
 }
 
+
 export function mergeQuestion({card, deck}) {
     return AsyncStorage.getItem(DECKS_STORAGE_KEY, (err, result) => {
         let decks = JSON.parse(result);
@@ -55,4 +57,15 @@ export function mergeQuestion({card, deck}) {
         })
         AsyncStorage.mergeItem(DECKS_STORAGE_KEY, value);
     });
+}
+
+export function removeDeck (title) {
+	console.log(title)
+	return AsyncStorage.getItem(DECKS_STORAGE_KEY)
+	.then((result) => {
+		const data = JSON.parse(result)
+		data[title] = undefined
+		delete data[title]
+		AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(data))
+	})
 }

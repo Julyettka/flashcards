@@ -4,7 +4,7 @@ import { primaryText, secondaryText, divider } from '../utils/colors'
 
 export default class DeckCard extends Component {
 	render () {
-		const {title, questions} = this.props
+		const {title, questions} = this.props || []
 		return <View style={styles.deck}>
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
                 <Text style={styles.title}>{title}</Text>

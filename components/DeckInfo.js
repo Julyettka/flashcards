@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
-import { white, primaryDark, primary, primaryText, secondaryText } from '../utils/colors'
+import { View, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native'
+import { white, primaryDark, primary, primaryText, secondaryText, accent } from '../utils/colors'
+import { removeDeck } from '../utils/api'
+import { connect } from 'react-redux'
 
 function AddCardBtn ({ onPress }) {
 	return (
@@ -22,21 +24,48 @@ function StartQuizBtn ({ onPress }) {
 		)
 }
 
-export default class DeckInfo extends Component {
+function RemoveBtn ({ onPress }) {
+	return (
+			<TouchableOpacity
+			onPress= {onPress}>
+                <Text style={styles.removeBtn}> Remove Deck </Text>
+            </TouchableOpacity>
+		)
+}
+
+class DeckInfo extends Component {
 	static navigationOptions = ({ navigation }) => {
 		const { title } = navigation.state.params
 		return {
 			title
 		}
 	}
+	removeDeck = () => {
+		const { dispatch, title } = this.props
+		console.log(title)
+		Alert.alert('Delete', 'Are you sure you want to remove this Deck?',
+			[
+			 	{
+			 		text: 'No', onPress: () => {}
+			 	},
+			 	{
+			 		text: 'Yes', onPress: () => {
+			 			removeDeck(title)
+			 			this.props.navigation.goBack()
+			 		}
+			 	}
+			])
+	}
 	render () {
-		const { title, questions } = this.props.navigation.state.params
+		let { title, questions } = this.props.navigation.state.params
+		questions = questions || []
 		return (
 			<View style={styles.container}>
 	        	<Text style={styles.title}> {title} </Text>
 	            <Text style={styles.info}>{questions.length}{questions.length > 1 ? ` cards` : ` card` }</Text>
 	            <AddCardBtn onPress={() => this.props.navigation.navigate('AddQuestion', {title, questions})}/>
 	            <StartQuizBtn onPress={() => this.props.navigation.navigate('Quiz', {title, questions})}/>
+	            <RemoveBtn onPress={this.removeDeck}/>
 	        </View>
 			)
     }
@@ -83,6 +112,18 @@ const styles = StyleSheet.create({
 	    marginTop: 10,
 	    marginBottom: 10,
 	    width: 160
-    }
-
+    },
+    removeBtn: {
+    	color: accent,
+    	marginTop: 40,
+    },
 })
+
+function mapStateToProps (state, {navigation}) {
+const { title } = navigation.state.params
+	return {
+		title
+	}
+}
+
+export default connect(mapStateToProps) (DeckInfo)

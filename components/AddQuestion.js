@@ -33,7 +33,7 @@ class AddQuestion extends Component{
 			card: {question, answer},
 			deck: title
 		})
-		Alert.alert('Successful', 'Card added',
+		Alert.alert('Success', 'Card added',
 			[
                 {
                     text: 'OK', onPress: () =>

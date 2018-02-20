@@ -28,7 +28,7 @@ class NewDeck extends Component {
 			const newDeck = {[deckObj.deckTitle]: {title: deckObj.deckTitle, questions: []}}
 			dispatch(addDeck(newDeck))
 			mergeDeck(newDeck)
-			Alert.alert('Successful', 'Deck added',
+			Alert.alert('Success', 'Deck added',
 			[
                 {
                     text: 'OK', onPress: () =>
