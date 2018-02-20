@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native'
-import { white, primaryDark, primary, primaryText, secondaryText, accent } from '../utils/colors'
+import { white, primaryDark, primary, primaryText, secondaryText, accent, divider } from '../utils/colors'
 import { removeDeck } from '../utils/api'
 import { connect } from 'react-redux'
 
@@ -24,6 +24,16 @@ function StartQuizBtn ({ onPress }) {
 		)
 }
 
+function DisabledBtn ({ onPress }) {
+	return (
+			<TouchableOpacity
+			style={styles.disabledBtn}
+			onPress= {onPress}>
+                <Text style={{color: white}}> Start Quiz </Text>
+            </TouchableOpacity>
+		)
+}
+
 function RemoveBtn ({ onPress }) {
 	return (
 			<TouchableOpacity
@@ -40,6 +50,11 @@ class DeckInfo extends Component {
 			title
 		}
 	}
+
+	warning = () => {
+		Alert.alert('Warning', 'No questions in this deck. Add cards first.')
+	}
+
 	removeDeck = () => {
 		const { dispatch, title } = this.props
 		console.log(title)
@@ -64,7 +79,11 @@ class DeckInfo extends Component {
 	        	<Text style={styles.title}> {title} </Text>
 	            <Text style={styles.info}>{questions.length}{questions.length > 1 ? ` cards` : ` card` }</Text>
 	            <AddCardBtn onPress={() => this.props.navigation.navigate('AddQuestion', {title, questions})}/>
-	            <StartQuizBtn onPress={() => this.props.navigation.navigate('Quiz', {title, questions})}/>
+	            {questions.length > 0 ?
+	            (<StartQuizBtn onPress={() => this.props.navigation.navigate('Quiz', {title, questions})}/>)
+	            :
+	            (<DisabledBtn onPress={this.warning}/>)
+	        	}
 	            <RemoveBtn onPress={this.removeDeck}/>
 	        </View>
 			)
@@ -116,6 +135,20 @@ const styles = StyleSheet.create({
     removeBtn: {
     	color: accent,
     	marginTop: 40,
+    	padding: 15
+    },
+    disabledBtn: {
+    	backgroundColor: divider,
+	    padding: 10,
+	    paddingLeft: 40,
+	    paddingRight: 40,
+	    height: 50,
+	    borderRadius: 2,
+	    justifyContent: 'center',
+	    alignItems: 'center',
+	    marginTop: 10,
+	    marginBottom: 10,
+	    width: 160
     },
 })
 

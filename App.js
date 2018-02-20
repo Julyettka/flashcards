@@ -11,6 +11,7 @@ import reducer from './reducers'
 import DeckInfo from './components/DeckInfo'
 import AddQuestion from './components/AddQuestion'
 import Quiz from './components/Quiz'
+import { setLocalNotification } from './utils/notifications'
 
 function FlashStatusBar ({ backgroundColor, ...props}) {
   return (
