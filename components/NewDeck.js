@@ -32,7 +32,10 @@ class NewDeck extends Component {
 			[
                 {
                     text: 'OK', onPress: () =>
-                    this.props.navigation.goBack()
+                    this.props.navigation.navigate('DeckInfo', {
+                    	title: deckObj.deckTitle,
+                    	questions: []
+                    })
                 }
             ])
 			this.setState({deckTitle: ''})

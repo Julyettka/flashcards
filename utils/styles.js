@@ -1,7 +1,8 @@
-import { white, primaryDark, primaryLight, primary, 
+import { StyleSheet } from 'react-native'
+import { white, primaryDark, primaryLight, primary,
 	accent, primaryText, secondaryText, divider } from './colors'
 
-export const SubmitBtn = StyleSheet.create({
+const submitBtn = StyleSheet.create({
     iosSubmitBtn: {
 	    backgroundColor: primaryDark,
 	    padding: 10,
@@ -23,3 +24,5 @@ export const SubmitBtn = StyleSheet.create({
 	    width: 160
   },
 })
+
+export default submitBtn
