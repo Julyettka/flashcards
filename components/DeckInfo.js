@@ -1,47 +1,9 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native'
-import { white, primaryDark, primary, primaryText, secondaryText, accent, divider } from '../utils/colors'
+import { primaryText, secondaryText } from '../utils/colors'
 import { removeDeck } from '../utils/api'
 import { connect } from 'react-redux'
-
-function AddCardBtn ({ onPress }) {
-	return (
-			<TouchableOpacity
-			style={styles.addCardBtn}
-			onPress= {onPress}>
-                <Text style={{color: white}}> Add Card </Text>
-            </TouchableOpacity>
-		)
-}
-//disable button if 0 cards
-function StartQuizBtn ({ onPress }) {
-	return (
-			<TouchableOpacity
-			style={styles.quizBtn}
-			onPress= {onPress}>
-                <Text style={{color: white}}> Start Quiz </Text>
-            </TouchableOpacity>
-		)
-}
-
-function DisabledBtn ({ onPress }) {
-	return (
-			<TouchableOpacity
-			style={styles.disabledBtn}
-			onPress= {onPress}>
-                <Text style={{color: white}}> Start Quiz </Text>
-            </TouchableOpacity>
-		)
-}
-
-function RemoveBtn ({ onPress }) {
-	return (
-			<TouchableOpacity
-			onPress= {onPress}>
-                <Text style={styles.removeBtn}> Remove Deck </Text>
-            </TouchableOpacity>
-		)
-}
+import {AddCardBtn, StartQuizBtn, DisabledBtn, RemoveBtn} from './Buttons'
 
 class DeckInfo extends Component {
 	static navigationOptions = ({ navigation }) => {
@@ -105,51 +67,7 @@ const styles = StyleSheet.create({
     	fontSize: 16,
     	color: secondaryText,
     	marginBottom: 140,
-    },
-    addCardBtn: {
-    	backgroundColor: primary,
-	    padding: 10,
-	    paddingLeft: 40,
-	    paddingRight: 40,
-	    height: 50,
-	    borderRadius: 2,
-	    justifyContent: 'center',
-	    alignItems: 'center',
-	    marginTop: 10,
-	    marginBottom: 10,
-	    width: 160
-    },
-    quizBtn: {
-    	backgroundColor: primaryDark,
-	    padding: 10,
-	    paddingLeft: 40,
-	    paddingRight: 40,
-	    height: 50,
-	    borderRadius: 2,
-	    justifyContent: 'center',
-	    alignItems: 'center',
-	    marginTop: 10,
-	    marginBottom: 10,
-	    width: 160
-    },
-    removeBtn: {
-    	color: accent,
-    	marginTop: 40,
-    	padding: 15
-    },
-    disabledBtn: {
-    	backgroundColor: divider,
-	    padding: 10,
-	    paddingLeft: 40,
-	    paddingRight: 40,
-	    height: 50,
-	    borderRadius: 2,
-	    justifyContent: 'center',
-	    alignItems: 'center',
-	    marginTop: 10,
-	    marginBottom: 10,
-	    width: 160
-    },
+    }
 })
 
 function mapStateToProps (state, {navigation}) {

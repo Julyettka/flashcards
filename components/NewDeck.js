@@ -4,7 +4,7 @@ import { primaryText, white, primaryDark } from '../utils/colors'
 import { addDeck } from '../actions'
 import { mergeDeck } from '../utils/api'
 import { connect } from 'react-redux'
-import SubmitBtn from './SubmitBtn'
+import { SubmitBtn } from './Buttons'
 
 class NewDeck extends Component {
 	state = {

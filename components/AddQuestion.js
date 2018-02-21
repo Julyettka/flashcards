@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { View, Text, TextInput, StyleSheet, KeyboardAvoidingView,
 	TouchableOpacity, Alert } from 'react-native'
-import { primaryText, white, primaryDark } from '../utils/colors'
-import SubmitBtn from './SubmitBtn'
+import { primaryText } from '../utils/colors'
+import SubmitBtn from './Buttons'
 import { connect } from 'react-redux'
 import { addQuestion } from '../actions/'
 import { mergeQuestion } from '../utils/api'
-//addQuestionForDeck
 
 class AddQuestion extends Component{
 	static navigationOptions = ({ navigation }) => {

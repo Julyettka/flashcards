@@ -1,46 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
-import { white, primaryDark, primaryLight, primary, primaryText, secondaryText, accent, divider } from '../utils/colors'
-
-function CorrectBtn ({ onPress }) {
-	return (
-			<TouchableOpacity
-			style={styles.CorrectBtn}
-			onPress= {onPress}>
-                <Text style={{color: white}}> Correct </Text>
-            </TouchableOpacity>
-		)
-}
-
-function IncorrectBtn ({ onPress }) {
-	return (
-			<TouchableOpacity
-			style={styles.IncorrectBtn}
-			onPress= {onPress}>
-                <Text style={{color: white}}> Incorrect </Text>
-            </TouchableOpacity>
-		)
-}
-
-function StartAgainBtn ({ onPress }) {
-	return (
-			<TouchableOpacity
-			style={styles.CorrectBtn}
-			onPress= {onPress}>
-                <Text style={{color: white}}> Start Again </Text>
-            </TouchableOpacity>
-		)
-}
-
-function BackDeckBtn ({ onPress}){
-	return (
-			<TouchableOpacity
-			style={styles.BackDeckBtn}
-			onPress= {onPress}>
-                <Text style={{color: white}}> Go Back </Text>
-            </TouchableOpacity>
-		)
-}
+import { white, primary, primaryText, secondaryText } from '../utils/colors'
+import { CorrectBtn, IncorrectBtn, StartAgainBtn, BackDeckBtn } from './Buttons'
 
 export default class Quiz extends Component{
 	state = {
@@ -163,44 +124,5 @@ const styles = StyleSheet.create({
     	fontSize: 16,
     	marginBottom: 40,
     	textDecorationLine: 'underline',
-    },
-    CorrectBtn: {
-    	backgroundColor: primaryDark,
-	    padding: 10,
-	    paddingLeft: 40,
-	    paddingRight: 40,
-	    height: 50,
-	    borderRadius: 2,
-	    justifyContent: 'center',
-	    alignItems: 'center',
-	    marginTop: 10,
-	    marginBottom: 10,
-	    width: 160
-    },
-    IncorrectBtn: {
-    	backgroundColor: accent,
-	    padding: 10,
-	    paddingLeft: 40,
-	    paddingRight: 40,
-	    height: 50,
-	    borderRadius: 2,
-	    justifyContent: 'center',
-	    alignItems: 'center',
-	    marginTop: 10,
-	    marginBottom: 10,
-	    width: 160
-    },
-    BackDeckBtn: {
-    	backgroundColor: primary,
-	    padding: 10,
-	    paddingLeft: 40,
-	    paddingRight: 40,
-	    height: 50,
-	    borderRadius: 2,
-	    justifyContent: 'center',
-	    alignItems: 'center',
-	    marginTop: 10,
-	    marginBottom: 10,
-	    width: 160
     }
 })
