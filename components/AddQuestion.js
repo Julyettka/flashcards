@@ -2,16 +2,16 @@ import React, { Component } from 'react'
 import { View, Text, TextInput, StyleSheet, KeyboardAvoidingView,
 	TouchableOpacity, Alert } from 'react-native'
 import { primaryText } from '../utils/colors'
-import SubmitBtn from './Buttons'
+import { SubmitBtn } from './Buttons'
 import { connect } from 'react-redux'
-import { addQuestion } from '../actions/'
+import { addQuestion } from '../actions'
 import { mergeQuestion } from '../utils/api'
 
 class AddQuestion extends Component{
 	static navigationOptions = ({ navigation }) => {
 		const { title } = navigation.state.params
 		return {
-			title: `Add new card to ${title} deck`
+			title: `New card to ${title} deck`
 		}
 	}
 	state = {

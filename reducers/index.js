@@ -1,4 +1,4 @@
-import { FETCH_DECKS, ADD_DECK, ADD_QUESTION } from '../actions'
+import { FETCH_DECKS, ADD_DECK, ADD_QUESTION } from '../actions/types'
 
 function decks(state = {}, action) {
     switch (action.type) {
